@@ -40,6 +40,9 @@ Codegen туршиж үзэх:
 ```bash
 npx playwright codegen saucedemo.com
 ```
+## Тестийн үр дүн
+
+3 тест бүгд амжилттай (3 passed). Дэлгэрэнгүйг `screenshot/` фолдерт үзнэ үү.
 
 ## Playwright ба Selenium-ийн ялгааны талаарх ажиглалт
 
