@@ -1,0 +1,14 @@
+{
+  "name": "my-first-test",
+  "version": "1.0.0",
+  "description": "Lab01: UI автомат тест — Playwright (F.CSA313)",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:trace": "playwright test --trace on",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0"
+  }
+}
