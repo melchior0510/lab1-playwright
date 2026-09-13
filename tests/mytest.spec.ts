@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 
 /**
  * Lab01 — UI автомат тест (Playwright)
- * Дадлагын сайт: https://www.saucedemo.com
  *
  * Гурван тест:
  *   1. Амжилттай нэвтрэх (standard_user / secret_sauce)
@@ -37,8 +36,10 @@ test.describe('SauceDemo — нэвтрэх ба сагслах', () => {
     await expect(page).toHaveURL(/inventory\.html/);
 
     // Тест бүрийг зөв төгсгөх — logout хийж дараагийн тестэд нөлөөлөхгүй байлгах
+    // Тайлбар: Logout элемент өмнө нь "link" role-той байсан бол сайт
+    // шинэчлэгдсэнээс хойш "button" role-той болсныг debug хийх явцад мэдэрсэн.
     await page.locator('#react-burger-menu-btn').click();
-    await page.getByRole('link', { name: 'Logout' }).click();
+    await page.getByRole('button', { name: 'Logout' }).click();
     await expect(page.getByPlaceholder('Username')).toBeVisible();
   });
 
@@ -72,12 +73,16 @@ test.describe('SauceDemo — нэвтрэх ба сагслах', () => {
     await expect(cartBadge).toHaveText('1');
 
     // Сагс руу орж, барааг жагсаалтад байгааг баталгаажуулах
-    await page.locator('.shopping_cart_link').click();
+    // Тайлбар: эхэндээ CSS class (.shopping_cart_link) болон role-based
+    // locator (getByRole('button', {name: /Cart/i})) ашигласан боловч сайт
+    // шинэчлэгдсэнээс "Add to cart" товчнуудтай давхцаж strict mode
+    // violation өгсөн тул илүү тогтвортой data-test attribute-д шилжүүлэв.
+    await page.locator('[data-test="shopping-cart-link"]').click();
     await expect(page.getByText('Sauce Labs Backpack')).toBeVisible();
 
     // Төгсгөх алхам — logout
     await page.locator('#react-burger-menu-btn').click();
-    await page.getByRole('link', { name: 'Logout' }).click();
+    await page.getByRole('button', { name: 'Logout' }).click();
     await expect(page.getByPlaceholder('Username')).toBeVisible();
   });
 

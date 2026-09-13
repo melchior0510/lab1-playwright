@@ -2,6 +2,9 @@
 
 F.CSA313 — Программ хангамжийн чанарын баталгаа ба тест (2026)
 
+**Оюутан:** Мөнх-Оргил
+**Код:** B242270130
+
 ## Юу хийсэн
 
 - `npm init playwright@latest` командаар Playwright TypeScript төсөл үүсгэсэн.
@@ -40,9 +43,18 @@ Codegen туршиж үзэх:
 ```bash
 npx playwright codegen saucedemo.com
 ```
+
 ## Тестийн үр дүн
 
-3 тест бүгд амжилттай (3 passed). Дэлгэрэнгүйг `screenshot/` фолдерт үзнэ үү.
+3 тест бүгд амжилттай (3 passed). Бодит HTML тайлан `playwright-report/`
+фолдерт, зөв trace-үүд `test-results/` фолдерт байна.
+
+Алхам 4-ийн шаардлагын дагуу нэг assertion-ийг (`toHaveText('1')` →
+`toHaveText('99')`) санаатайгаар буруу болгож ажиллуулаад, гарсан алдааны
+trace-ийг `evidence/failing-trace-toHaveText99.zip` файлд тусад нь хадгалав.
+Уг trace-ийг `npx playwright show-trace evidence/failing-trace-toHaveText99.zip`
+командаар нээж болно — алдаа гарсан `Expect "toHaveText"` алхам дээр
+`expectedText: "99"` гэж бодит утгатай зөрчилдсөнийг харуулна.
 
 ## Playwright ба Selenium-ийн ялгааны талаарх ажиглалт
 
@@ -62,17 +74,3 @@ Selenium-ий энгийн screenshot/лог-оос илүү мэдээлэлт�
 боловч Playwright-ийн дэмждэг JS/TS, Python, Java, C# ихэнх төсөлд хангалттай.
 Ерөнхийдөө Playwright нь илүү шинэ, "batteries-included" арга барилтай тул
 цөөн тохиргоогоор илүү тогтвортой тест бичих боломж олгодог гэж дүгнэлээ.
-
-## GitHub-д байршуулах алхам
-
-```bash
-git init
-git add .
-git commit -m "Lab01: Playwright эхний тест — нэвтрэх ба сагслах"
-git branch -M main
-git remote add origin <ӨӨРИЙН_GITHUB_REPO_ЛИНК>
-git push -u origin main
-```
-
-> **Санамж:** commit-уудаа явцад нь тогтмол хийж, бүх ажлыг нэг commit-д
-> шахаж оруулахгүй байх (даалгаврын гол шаардлагуудын нэг).
